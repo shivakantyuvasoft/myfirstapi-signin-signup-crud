@@ -9,7 +9,7 @@ const checkAuth = require("../Middleware/checkAuth");
 // Router.get("/",checkAuth,(req,res,next)=>{
 // in every Route in curd
  
-Router.get("/",(req,res,next)=>{
+Router.get("/data",(req,res,next)=>{
     Student.find().exec()
     .then((result)=>{
         res.status(200).json({
@@ -23,7 +23,7 @@ Router.get("/",(req,res,next)=>{
 })
 
 
-Router.get("/:id",(req,res,next)=>{
+Router.get("/data/:id",(req,res,next)=>{
     Student.findById({_id:req.params.id}).then((result)=>{
         res.status(200).json({
             allStudent : result
@@ -35,7 +35,7 @@ Router.get("/:id",(req,res,next)=>{
     })
 })
 
-Router.delete("/:id",(req,res,next)=>{
+Router.delete("/data/:id",(req,res,next)=>{
     Student.deleteOne({_id:req.params.id}).then((result)=>{
         res.status(200).json({
             message:"user remove successfully",
@@ -49,7 +49,7 @@ Router.delete("/:id",(req,res,next)=>{
 })
 
 
-Router.put("/:id",(req,res,next)=>{
+Router.put("/data/:id",(req,res,next)=>{
     Student.findOneAndUpdate({_id:req.params.id},{
         $set:{
             name:req.body.name,
@@ -69,7 +69,7 @@ Router.put("/:id",(req,res,next)=>{
 })
 
 
-Router.post("/",(req,res,next)=>{
+Router.post("/data",(req,res,next)=>{
     const student = new Student({
         _id:new mongoose.Types.ObjectId,
         name:req.body.name,
